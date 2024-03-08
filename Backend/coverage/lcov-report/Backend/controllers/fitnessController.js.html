@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">37.5% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/48</span>
+                <span class='fraction'>18/48</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">23.52% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>4/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>2/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">37.5% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/48</span>
+                <span class='fraction'>18/48</span>
             </div>
         
             
@@ -160,24 +160,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -251,25 +251,25 @@
 const Fitness = require("../models/fitnessModel");
 &nbsp;
 // 2.1 Add Fitness Data
-const addFitnessData = <span class="fstat-no" title="function not covered" >as</span>ync (req,res) =&gt; {
-    const { title, date, duration, caloriesBurned } = <span class="cstat-no" title="statement not covered" >req.body;</span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        if (!title || !date || !duration) {</span>
+const addFitnessData = async (req,res) =&gt; {
+    const { title, date, duration, caloriesBurned } = req.body;
+    try {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!title || !date || !duration) {
 <span class="cstat-no" title="statement not covered" >            res.status(400).json("All Fields must be filled")</span>
         }
-        const newFitness = <span class="cstat-no" title="statement not covered" >new Fitness({title, date, duration, caloriesBurned});</span>
-        const addedFitnessData = <span class="cstat-no" title="statement not covered" >await newFitness.save();</span>
-<span class="cstat-no" title="statement not covered" >        res.status(201).json(addedFitnessData);</span>
+        const newFitness = new Fitness({title, date, duration, caloriesBurned});
+        const addedFitnessData = await newFitness.save();
+        res.status(201).json(addedFitnessData);
     } catch(error) {
-<span class="cstat-no" title="statement not covered" >        res.status(500).json("Internal Server Error (addFitnessData)");</span>
+        res.status(500).json("Internal Server Error (addFitnessData)");
     }
 };
 &nbsp;
 // 2.2 Get All Fitness Data
-const getAllFitnessData = <span class="fstat-no" title="function not covered" >as</span>ync (req,res) =&gt; {
-<span class="cstat-no" title="statement not covered" >    try{</span>
-        const allData = <span class="cstat-no" title="statement not covered" >await Fitness.find({}).sort({createdAt: -1});</span>
-<span class="cstat-no" title="statement not covered" >        res.status(200).json(allData);</span>
+const getAllFitnessData = async (req,res) =&gt; {
+    try{
+        const allData = await Fitness.find({}).sort({createdAt: -1});
+        res.status(200).json(allData);
     } catch (error) {
 <span class="cstat-no" title="statement not covered" >        res.status(500).json("Internal Server Error");</span>
     }
@@ -346,7 +346,7 @@ module.exports = { addFitnessData,
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-08T09:50:32.915Z
+                at 2024-03-08T10:43:06.388Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
