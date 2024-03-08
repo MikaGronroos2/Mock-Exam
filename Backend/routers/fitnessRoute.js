@@ -20,3 +20,5 @@ router.delete("/:id", deleteFitnessData);
 
 // 2.5 Update Fitness Data by ID
 router.put("/:id", updateFitnessData);
+
+module.exports = router;

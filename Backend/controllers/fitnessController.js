@@ -9,10 +9,10 @@ const addFitnessData = async (req,res) => {
             res.status(400).json("All Fields must be filled")
         }
         const newFitness = new Fitness({title, date, duration, caloriesBurned});
-        await newFitness.save();
-        res.status(201).json(newFitness);
+        const addedFitnessData = await newFitness.save();
+        res.status(201).json(addedFitnessData);
     } catch(error) {
-        res.status(500).json("Internal Server Error");
+        res.status(500).json("Internal Server Error (addFitnessData)");
     }
 };
 
@@ -30,17 +30,18 @@ const getAllFitnessData = async (req,res) => {
 // 2.3 Get Single Fitness Data by ID
 const getFitnessData = async (req,res) => {
     const { id } = req.params;
+    console.log(id)
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error:"No Such FitnessData Found"})
     }
     try {
-        const fitnessData = await Fitness.findById({ id })
+        const fitnessData = await Fitness.findById( id )
         if (!fitnessData) {
             return res.status(404).json({ error: "No such Data found" })
         }
         res.status(200).json(fitnessData);
     } catch (error) {
-        res.status(500).json({ error: "Internal Server Error" })
+        res.status(500).json({ error: "Internal Server Error (getFitnessData)" })
     }
 };
 
